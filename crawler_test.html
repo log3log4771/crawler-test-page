@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script type="text/javascript" language="javascript">
+		$(document).ready(function() {
+			var path = location.href.split('/');
+			if (path[path.length-1].indexOf('.html') > -1) {
+			  // path.length = path.length - 1;
+			  path.pop();
+			}
+
+			var requestUrl = path.concat("MaNewsCrawler.txt").join('/');
+
+			// console.log(requestUrl);
+
+			// var requestUrl = window.location.href.split('/').slice(0, -1).concat("").join('/')
+			$.get(requestUrl, function(response) {
+				var data = JSON.parse(response);
+
+				for (var i in data) {
+					$('.content').append("<p>" + data[i] + "</p>");
+				}
+
+				// $('.content').text(response);
+				// for (var i in response) {
+				// 	$('.content').append(response[i]);
+				// }
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="content"></div>
+</body>
+</html>
